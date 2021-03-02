@@ -1,5 +1,11 @@
 import { authService, firebaseInstance } from 'fbase';
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
 import AuthForm from 'components/AuthForm';
 
 const Auth = () => {
@@ -13,10 +19,18 @@ const Auth = () => {
         await authService.signInWithPopup(provider);
     }
     return (
-        <div>
+        <div className="authContainer">
+            <FontAwesomeIcon
+                icon={faTwitter}
+                color={"#04AAFF"}
+                size="3x"
+                style={{ marginBottom: 30 }}
+            />
             <AuthForm />
-            <div>
-                <button name="google" onClick={onSocialClick}>Google</button>
+            <div className="authBtns">
+                <button name="google" onClick={onSocialClick} className="authBtn">
+                    Continue with Google <FontAwesomeIcon icon={faGoogle} />
+                </button>
             </div>
         </div>
     )
