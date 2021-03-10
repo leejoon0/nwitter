@@ -7,6 +7,7 @@ const Home = ({ userObj }) => {
     const [nweets, setNweets] = useState([]);
     const getNweets = async() => {
         const dbNweets = await dbService.collection("nweets").get();
+        
         dbNweets.forEach((document) => {
             const nweetObject = {
                 ...document.data(),
@@ -16,7 +17,7 @@ const Home = ({ userObj }) => {
             });
     }
     useEffect(()=>{
-        dbService.collection("nweets").onSnapshot((snapshot) => {
+        dbService.collection("nweets").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
             const nweetArray = snapshot.docs.map(doc => ({id:doc.id, ...doc.data(),}));
             setNweets(nweetArray)
         });
@@ -26,7 +27,7 @@ const Home = ({ userObj }) => {
             <NweetFactory userObj={userObj} />
             <div  style={{ marginTop: 30 }}>
                 {nweets.map((nweet)=> (                    
-                    <Nweet key={nweet.id} nweetObj={nweet} isOwner={nweet.creatorId === userObj.uid} />
+                    <Nweet key={nweet.id} nweetObj={nweet} userObj={userObj} isOwner={nweet.creatorId === userObj.uid} />
                 ))}
             </div>
         </div>
