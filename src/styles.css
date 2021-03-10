@@ -173,7 +173,7 @@ form {
   background-color: white;
   width: 100%;
   max-width: 320px;
-  padding: 20px;
+  padding: 40px;
   border-radius: 10px;
   position: relative;
   display: flex;
@@ -182,17 +182,43 @@ form {
 }
 
 .nweet h4 {
+  position: relative;
+  top: 20px;
   font-size: 14px;
 }
 
 .nweet img {
   right: -10px;
   top: 20px;
+  position: inherit;
+  /* position: absolute;
+  width: 50px;
+  height: 50px; */
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.nweet .userimg {
   position: absolute;
-  border-radius: 50%;
+  border-radius: 10px;
   width: 50px;
   height: 50px;
   margin-top: 10px;
+  left: 5px;
+  top: -5px;
+}
+
+.profileImage {
+  border-radius: 40%;
+  width: 50px;
+  height: 50px;
+}
+
+.nweet__creatorname {
+  position: relative;
+  top: -25px;
+  padding-left: 20px;
+  font-weight: bold;
 }
 
 .nweet__actions {

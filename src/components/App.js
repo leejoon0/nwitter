@@ -11,19 +11,23 @@ function App() {
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
+          photo: user.photoURL,
           updateProfile: (args) => user.updateProfile(args),
         });
       } else {
         setUserObj(null);
       }
+      // console.log("user-", authService)
       setInit(true);
     });
   }, []);
   const refreshUser = () => {
     const user = authService.currentUser;
+    
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
+      photo: user.photoURL,
       updateProfile: (args) => user.updateProfile(args),
     });
   };

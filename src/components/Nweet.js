@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Nweet = ({nweetObj, isOwner}) => {
+const Nweet = ({nweetObj, userObj, isOwner}) => {
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
     const onDeleteClick = async () => {
@@ -37,10 +37,15 @@ const Nweet = ({nweetObj, isOwner}) => {
                     </>
                 ) : (
                     <>
+                    <div className="nweet__creatorname">
+                        <span>{nweetObj.creatorName}</span>
+                        <span> {new Date(nweetObj.createdAt).toLocaleTimeString()}</span>
+                    </div>
+                    <img src={nweetObj.creatorPhoto} className="userimg" />
                     <h4>{nweetObj.text}</h4>
                     {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
                     {isOwner && 
-                        <div class="nweet__actions">
+                        <div className="nweet__actions">
                             <span onClick={onDeleteClick}>
                                 <FontAwesomeIcon icon={faTrash} />
                             </span>

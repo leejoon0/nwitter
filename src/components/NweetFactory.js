@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService, storgaeService } from 'fbase';
+import { dbService, storgaeService, authService } from 'fbase';
 import { v4 as uuidv4} from 'uuid';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -23,10 +23,20 @@ const NweetFactory = ({ userObj }) => {
         const nweetObj = {
             text: nweet,
             createdAt: Date.now(),
+            creatorName: userObj.displayName,
             creatorId: userObj.uid,
+            creatorPhoto: userObj.photo,
             attachmentUrl
         }
         await dbService.collection("nweets").add(nweetObj);
+        
+        const user = authService.currentUser;
+        // user.sendEmailVerification().then(function() {
+        //   // Email sent.
+        // }).catch(function(error) {
+        //   // An error happened.
+        // });
+
         setNweet("");
         setAttachment("");
     }
